@@ -12,7 +12,7 @@ import java.util.List;
 public class RecipeController {
 
 
-    private IRecipeService recipeService ;
+    private final IRecipeService recipeService;
 
     public RecipeController(IRecipeService recipeService) {
         this.recipeService = recipeService;

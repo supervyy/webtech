@@ -9,7 +9,7 @@ import java.util.List;
 public class RecipeService implements IRecipeService {
 
 
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
 
     public RecipeService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;

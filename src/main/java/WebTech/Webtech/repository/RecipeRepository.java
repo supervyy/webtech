@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class RecipeRepository {
 
-    private List<Recipe> recipes = new ArrayList<>();
+    private final List<Recipe> recipes = new ArrayList<>();
 
     public List<Recipe> findAll(){
         return recipes;
