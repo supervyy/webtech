@@ -12,13 +12,13 @@ import java.util.List;
 public class RecipeController {
 
 
-    private final IRecipeService recipeService;
+    private  IRecipeService recipeService;
 
     public RecipeController(IRecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/recipe")
+    @GetMapping("/recipes")
     public List<Recipe> findAllRecipes() {
         return recipeService.findAllRecipes();
     }
