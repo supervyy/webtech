@@ -1,26 +1,44 @@
 package WebTech.Webtech.service;
 
 import WebTech.Webtech.entity.Recipe;
-import WebTech.Webtech.repository.RecipeRepository;
+import WebTech.Webtech.repository.IRecipeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+import java.util.Optional;
+
 @Service
-public class RecipeService implements IRecipeService {
+public class RecipeService {
 
+    @Autowired
+    private IRecipeRepository irecipeRepository;
 
-    private  RecipeRepository recipeRepository;
-
-    public RecipeService(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
-    }
-    @Override
-    public List<Recipe> findAllRecipes() {
-        return recipeRepository.findAll();
+    public RecipeService(IRecipeRepository irecipeRepository) {
+        this.irecipeRepository = irecipeRepository;
     }
 
-    //@Override
-    //public Recipe findRecipeById(int id) {
-    //    return null;
-    //}
+    public Iterable<Recipe> findAllRecipes() {
+        return this.irecipeRepository.findAll();
+    }
+
+    public Optional<Recipe> findRecipe(final int id) {
+        return this.irecipeRepository.findById(id);
+    }
+
+    public Recipe addRecipe(final Recipe recipe) {
+        return this.irecipeRepository.save(recipe);
+    }
+
+    public Recipe editRecipe(final Recipe recipe) {
+        if (!this.irecipeRepository.existsById(recipe.getId())) return null;
+
+        return addRecipe(recipe);
+    }
+
+    public boolean removeRecipe(final int id) {
+        final boolean exists = this.irecipeRepository.existsById(id);
+        if (exists) this.irecipeRepository.deleteById(id);
+        return exists;
+    }
 }

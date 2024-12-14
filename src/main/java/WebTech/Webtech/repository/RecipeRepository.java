@@ -16,9 +16,7 @@ public class RecipeRepository {
         return recipes;
 
     }
-    //public Recipe findById(int id){
-
-    //}
+    
     @PostConstruct
     private void init(){
     recipes.add(new Recipe(1, "Korean Fried Chicken", "Crispy and flavorful chicken with a spicy glaze",
@@ -39,10 +37,11 @@ public class RecipeRepository {
     "Drinks", "1 tsp Matcha Powder, 1 cup Milk, 1 tbsp Sugar", 
     "1. Mix matcha powder with a little hot water. 2. Heat milk in a saucepan. 3. Add sugar to the milk. 4. Pour the milk into the matcha mixture. 5. Stir well",
     "Anyu"));
-
+    
+    
     recipes.add(new Recipe(4, "Tiramisu", "Classic Italian dessert made with coffee and mascarpone cheese",
      "https://i.pinimg.com/736x/eb/67/cd/eb67cdd4329512df261dcde1dce229f9.jpg",
-     "Desserts", "1 cup Espresso, 1/2 cup Sugar, 1/4 cup Marsala Wine, 1 cup Mascarpone Cheese, 1 cup Whipped Cream, 1 pack Ladyfingers, Cocoa Powder", 
+     "Desserts", "1 cup Espresso, 1/2 cup Sugar, 1/4 cup Marsala Wine, 1 cup Mascarpone Cheese, 1 cup Whipped Cream, 1 pack Ladyfingers, Cocoa Powder",
      "1. Mix espresso, sugar, and marsala wine. 2. Dip ladyfingers in the espresso mixture. 3. Layer the ladyfingers in a dish. 4. Mix mascarpone cheese and whipped cream. 5. Spread the cheese mixture over the ladyfingers. 6. Repeat the layers. 7. Dust with cocoa powder.",
      "Noobanh"));
     }
