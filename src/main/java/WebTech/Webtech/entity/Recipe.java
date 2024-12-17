@@ -16,13 +16,10 @@ public class Recipe {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private int id;
  private String name;
- @Column(columnDefinition = "TEXT")
  private String description;
  private String image;
  private String category;
- @Column(columnDefinition = "TEXT")
  private String ingredients;
- @Column(columnDefinition = "TEXT")
  private String instructions;
  private String author;
 

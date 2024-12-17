@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/recipes")
+@RequestMapping("recipes")
 public class RecipeController {
 
 
@@ -45,18 +45,18 @@ public class RecipeController {
         else return ResponseEntity.ok(recipeOptional.get());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody final Recipe recipe) {
         final Recipe created = recipeService.addRecipe(recipe);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
-    @PutMapping("/recipes/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable("id") int id, @RequestBody Recipe recipe) {
         recipe.setId(id);
         Recipe updated = recipeService.editRecipe(recipe);
         return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
-    @DeleteMapping("/recipes/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRecipe(@PathVariable("id") int id) {
         return recipeService.removeRecipe(id)
                 ? ResponseEntity.noContent().build()
