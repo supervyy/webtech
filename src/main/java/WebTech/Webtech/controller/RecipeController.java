@@ -27,11 +27,13 @@ public class RecipeController {
         return ResponseEntity.ok(result);
 
     }
+
     @GetMapping(value = "/category/{category}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<Recipe>> getRecipesByCategory(@PathVariable("category") String category) {
         final Iterable<Recipe> result = recipeService.getRecipesByCategory(category);
         return ResponseEntity.ok(result);
     }
+
     @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<Recipe>> getRecipesByName(@PathVariable("name") String name) {
         final Iterable<Recipe> result = recipeService.getRecipesByName(name);
@@ -50,17 +52,36 @@ public class RecipeController {
         final Recipe created = recipeService.addRecipe(recipe);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
+
+//    @PatchMapping("/favorites/{id}")
+//    public ResponseEntity<Recipe> updateFavorites(@PathVariable("id") int id, @RequestParam(required = false) Boolean favorites) {
+//        Optional<Recipe> optionalRecipe = recipeService.getRecipeById(id);
+//
+//        if (!optionalRecipe.isPresent()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        Recipe recipe = optionalRecipe.get();
+//        recipe.setFavorite(favorites);
+//
+//        recipeService.editRecipe(recipe);
+//
+//        return ResponseEntity.ok(recipe);
+//    }
+
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable("id") int id, @RequestBody Recipe recipe) {
         recipe.setId(id);
         Recipe updated = recipeService.editRecipe(recipe);
         return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRecipe(@PathVariable("id") int id) {
         return recipeService.removeRecipe(id)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
     }
-
 }
+

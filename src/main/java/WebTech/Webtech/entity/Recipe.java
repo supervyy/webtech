@@ -22,5 +22,5 @@ public class Recipe {
  private String ingredients;
  private String instructions;
  private String author;
-
+// private boolean favorite = false;
 }

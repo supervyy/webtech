@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry
                 .addMapping("/**")
                 .allowedMethods("*")
-                .allowedOrigins("http://localhost:5173",
+                .allowedOrigins("http://localhost:5174",
                         "https://webtech-frontend-fthr.onrender.com")
                 .allowCredentials(true);
     }
