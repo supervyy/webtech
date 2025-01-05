@@ -8,5 +8,7 @@ public interface IRecipeRepository extends CrudRepository<Recipe, Integer> {
 
     Iterable<Recipe> findRecipeByCategory(String category);
     Iterable<Recipe> findRecipeByName(String name);
-
+    Iterable<Recipe> findRecipeByFavorite(boolean favorite);
 }
+
+

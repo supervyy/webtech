@@ -28,6 +28,10 @@ public class RecipeService {
         return this.irecipeRepository.findRecipeByName(name);
     }
 
+    public Iterable<Recipe> getLikedRecipes() {
+        return irecipeRepository.findRecipeByFavorite(true);
+    }
+
     public Optional<Recipe> getRecipeById(final int id) {
         return this.irecipeRepository.findById(id);
     }

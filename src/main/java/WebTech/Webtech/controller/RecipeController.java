@@ -27,7 +27,6 @@ public class RecipeController {
         return ResponseEntity.ok(result);
 
     }
-
     @GetMapping(value = "/category/{category}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<Recipe>> getRecipesByCategory(@PathVariable("category") String category) {
         final Iterable<Recipe> result = recipeService.getRecipesByCategory(category);
@@ -46,6 +45,12 @@ public class RecipeController {
         if (!recipeOptional.isPresent()) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(recipeOptional.get());
     }
+    @GetMapping(value = "/liked", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Iterable<Recipe>> getLikedRecipes() {
+        final Iterable<Recipe> result = recipeService.getLikedRecipes();
+        return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
+    }
+
 
     @PostMapping
     public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody final Recipe recipe) {
@@ -53,21 +58,24 @@ public class RecipeController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-//    @PatchMapping("/favorites/{id}")
-//    public ResponseEntity<Recipe> updateFavorites(@PathVariable("id") int id, @RequestParam(required = false) Boolean favorites) {
-//        Optional<Recipe> optionalRecipe = recipeService.getRecipeById(id);
-//
-//        if (!optionalRecipe.isPresent()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        Recipe recipe = optionalRecipe.get();
-//        recipe.setFavorite(favorites);
-//
-//        recipeService.editRecipe(recipe);
-//
-//        return ResponseEntity.ok(recipe);
-//    }
+    @PatchMapping("/favorite/{id}")
+    public ResponseEntity<Recipe> updateFavorites(@PathVariable("id") int id, @RequestParam(required = false) Boolean favorite) {
+
+        if (favorite == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        Optional<Recipe> optionalRecipe = recipeService.getRecipeById(id);
+        if (!optionalRecipe.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        Recipe recipe = optionalRecipe.get();
+        recipe.setFavorite(favorite);
+
+        Recipe updatedRecipe = recipeService.editRecipe(recipe);
+
+        return ResponseEntity.ok(updatedRecipe);
+    }
 
 
     @PutMapping("/{id}")

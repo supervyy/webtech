@@ -17,11 +17,12 @@ public class Recipe {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private int id;
  private String name;
- @Column(columnDefinition = "TEXT")
+ @Column(length = 1000)
  private String description;
  private String image;
  private String category;
  private String ingredients;
+ @Column(length = 1000)
  private String instructions;
  private String author;
  private boolean favorite;
